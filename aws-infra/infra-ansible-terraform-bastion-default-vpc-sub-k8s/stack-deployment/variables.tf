@@ -43,3 +43,6 @@ variable "server_ec2_count" {}
 ## K8s Worker/Node
 variable "node_ec2_instance_type" {}
 variable "node_ec2_count" {}
+
+## K8s Join
+variable "key" {}

@@ -25,7 +25,7 @@ ec2_ami              = "ami-053b0d53c279acc90"
 ec2_instance_type    = "t2.micro"
 aws_key_name         = "mac2"
 ec2_volume_type      = "gp2"
-ec2_volume_size      = "8"
+ec2_volume_size      = "20"
 
 ## userdata variable
 os_type  = "ubuntu"
@@ -39,4 +39,7 @@ server_ec2_count           = "1"
 ## K8s Worker/Node
 node_ec2_instance_type   = "t2.micro"
 node_ec2_count           = "2"
+
+## K8s Join
+key = "~/.ssh/mac2.pem"
 
