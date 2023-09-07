@@ -53,6 +53,7 @@ module "my-server" {
    ec2_volume_type              = var.ec2_volume_type
    ec2_volume_size              = var.ec2_volume_size
    os_type                      = var.os_type
+   key                          = var.key
 }
 
 module "my-node" {
@@ -76,4 +77,6 @@ module "KubernetsSetup" {
    source        = "../modules/KubernetsSetup"
    key           = var.key
    environment   = var.environment
+   server_ip     = module.my-server.server_ip
+   node_ips     = module.my-node.node_ips
 }

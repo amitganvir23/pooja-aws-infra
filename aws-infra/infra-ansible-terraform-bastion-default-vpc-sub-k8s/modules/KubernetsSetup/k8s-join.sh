@@ -1,26 +1,26 @@
 #! /bin/bash
-#env=test
 ### its only for Ubuntu
-
 export user=ubuntu
-#export key="~/.ssh/mac2.pem"
 export env=$env
 export key=$key
-#env=$(echo $(grep '^environment' terraform.tfvars|awk '{print $3}'|tr -d '"'))
 echo Environment is $env
 
 ## Master
-master_instance_id=$(aws ec2 describe-instances --filters "Name=tag:Role,Values=${env}-server" --output text --query 'Reservations[*].Instances[*].InstanceId')
-export master_instance_ip=$(aws ec2 describe-instances --instance-ids $master_instance_id \
-    --query 'Reservations[*].Instances[*].PublicIpAddress' \
-    --output text)
+#master_instance_id=$(aws ec2 describe-instances --filters "Name=tag:Role,Values=${env}-server" --output text --query 'Reservations[*].Instances[*].InstanceId')
+#export master_instance_ip=$(aws ec2 describe-instances --instance-ids $master_instance_id \
+#    --query 'Reservations[*].Instances[*].PublicIpAddress' \
+#    --output text)
+export master_instance_ip=$server_ip
+
 echo Server Server master_instance_id $master_instance_id $master_instance_ip
+
+ssh -o StrictHostKeyChecking=no -i $key $user@$master_instance_ip "while [ ! -f /k8sdone ];do echo -e Waiting for k8s-deployment-init...;sleep 5; done"
+
 export k8s_join=$(ssh -o StrictHostKeyChecking=no -i $key $user@$master_instance_ip "sudo kubeadm token create --print-join-command")
+echo $k8s_join
 
 ## Checking Maser Node Status
-#sleep 2m
 echo Checking Master Status $master_instance_id $master_instance_ip
-#sleep 60
 state=$(ssh -o StrictHostKeyChecking=no -i $key $user@$master_instance_ip "sudo kubectl get nodes |grep master |awk '{print \$2}'")
 state1=$(echo "$state"|grep -c Ready)
 echo state: $state $state1
@@ -32,11 +32,13 @@ do
 done
 
 ## Node
-instance_id=$(aws ec2 describe-instances --filters "Name=tag:Role,Values=${env}-node" --output text --query 'Reservations[*].Instances[*].InstanceId')
-echo Node instance_id $instance_id
-instance_ip=$(aws ec2 describe-instances --instance-ids $instance_id \
-    --query 'Reservations[*].Instances[*].PublicIpAddress' \
-    --output text)
+#instance_id=$(aws ec2 describe-instances --filters "Name=tag:Role,Values=${env}-node" --output text --query 'Reservations[*].Instances[*].InstanceId')
+#echo Node instance_id $instance_id
+#instance_ip=$(aws ec2 describe-instances --instance-ids $instance_id \
+#    --query 'Reservations[*].Instances[*].PublicIpAddress' \
+#    --output text)
+export instance_ip=$node_ips
+
 echo Node instance_id $instance_id  $instance_ip
 
 for i in $instance_ip;
@@ -49,7 +51,7 @@ done
 for i in $instance_ip;
 do
   myip=$(ssh -o StrictHostKeyChecking=no -i $key $user@$i "hostname -i")
-  echo Checking Node Status $i $myip
+  echo Checking Node Status PublicIP: $i PrviateIP: $myip
   sleep 30
   state=$(ssh -o StrictHostKeyChecking=no -i $key $user@$master_instance_ip "sudo kubectl get nodes |grep $myip |awk '{print \$2}'")
   echo state: $state

@@ -46,6 +46,7 @@ do
   sleep 5
 done
 
+sudo touch /k8sdone
 #sudo systemctl restart kubelet.service
 #kubeadm token create --print-join-command
 

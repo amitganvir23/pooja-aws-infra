@@ -34,3 +34,6 @@ variable "ec2_volume_size" {}
 
 ## userdata variable
 variable "os_type" {}
+
+## K8s Join
+variable "key" {}

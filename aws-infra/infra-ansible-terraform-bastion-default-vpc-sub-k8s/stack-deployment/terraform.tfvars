@@ -12,7 +12,6 @@ vpc_id            = "vpc-07cab67d"
 subnet_id         = "subnet-4c694a2b"
 vpc_cidr          = "172.31.0.0/16"
 environment       = "test"
-vpc_name          = "amit-vpc"
 
 /* Classes of instances - has to change based on environment
 - Please choose between the following only

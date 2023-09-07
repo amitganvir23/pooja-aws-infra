@@ -38,5 +38,18 @@ resource "aws_instance" "server" {
       Environment = var.environment
       Stack       = "Supporting-mongo"
     }
+## copying private key from local to ec2
+      provisioner "file" {
+        source      = var.key
+        destination = "/home/ubuntu/privatekay"
+      connection {
+        type        = "ssh"
+        user        = "ubuntu"
+        private_key = "${file("${var.key}")}"
+        host        = "${self.public_ip}"
+      }
+    }
+
 
 }
+

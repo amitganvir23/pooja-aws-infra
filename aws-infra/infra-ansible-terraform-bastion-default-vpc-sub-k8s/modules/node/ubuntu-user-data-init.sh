@@ -19,3 +19,4 @@ sudo sysctl --system
 sudo sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward
 
 sudo mkdir /root/.kube
+sudo touch /k8sdone
