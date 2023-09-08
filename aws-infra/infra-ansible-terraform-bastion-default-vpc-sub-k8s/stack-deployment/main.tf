@@ -74,9 +74,10 @@ module "my-node" {
 }
 
 module "KubernetsSetup" {
-   source        = "../modules/KubernetsSetup"
-   key           = var.key
-   environment   = var.environment
-   server_ip     = module.my-server.server_ip
-   node_ips     = module.my-node.node_ips
+   source         = "../modules/KubernetsSetup"
+   key            = var.key
+   environment    = var.environment
+   server_ip      = module.my-server.server_ip
+   node_ips       = module.my-node.node_ips
+   node_ec2_count = var.node_ec2_count
 }
