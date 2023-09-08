@@ -72,6 +72,9 @@ echo Resting kubelet service
 ssh -o StrictHostKeyChecking=no -i $key $user@$master_instance_ip "sudo systemctl restart kubelet.service"
 
 echo FINISH
+## scale up coredns based on Node count
+export count $node_ec2_count
+kubectl scale deployment --replicas=${count} coredns --namespace=kube-system 
 
 echo TESTING CORDNS
 sleep 30
