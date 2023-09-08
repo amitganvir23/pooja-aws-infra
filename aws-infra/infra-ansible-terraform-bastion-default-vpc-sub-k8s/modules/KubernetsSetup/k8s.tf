@@ -7,10 +7,11 @@ resource "null_resource" "k8s_join" {
     command = "${path.module}/k8s-join.sh"
     interpreter = ["bash"]
     environment = {
-      key = var.key
-      env = var.environment
+      key       = var.key
+      env       = var.environment
       server_ip = var.server_ip
-      node_ips = var.node_ips
+      node_ips  = var.node_ips
+      count     = var.node_ec2_count
     }
   }
 }
