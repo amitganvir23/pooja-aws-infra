@@ -71,6 +71,7 @@ module "my-node" {
    ec2_volume_type              = var.ec2_volume_type
    ec2_volume_size              = var.ec2_volume_size
    os_type                      = var.os_type
+   depends_on                   = [module.my-server]
 }
 
 module "KubernetsSetup" {
@@ -79,5 +80,6 @@ module "KubernetsSetup" {
    environment    = var.environment
    server_ip      = module.my-server.server_ip
    node_ips       = module.my-node.node_ips
-   node_ec2_count = var.node_ec2_count
+   ec2_count      = var.node_ec2_count
+   depends_on     = [module.my-server]
 }

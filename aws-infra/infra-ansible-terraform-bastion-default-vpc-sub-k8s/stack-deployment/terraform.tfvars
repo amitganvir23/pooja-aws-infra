@@ -37,7 +37,7 @@ server_ec2_count           = "1"
 
 ## K8s Worker/Node
 node_ec2_instance_type   = "t2.micro"
-node_ec2_count           = "2"
+node_ec2_count           = "3"
 
 ## K8s Join
 key = "~/.ssh/mac2.pem"

@@ -15,8 +15,12 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.ipv4.ip_forward                 = 1
 EOF
 
+##- fixing core dns issue
+sudo echo 'Environment="cgroup-driver=systemd/cgroup-driver=cgroupfs"' >> /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+##
 sudo sysctl --system
 sudo sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward
+sudo systemctl daemon-reload
 
 sudo mkdir /root/.kube
 sudo touch /k8sdone
