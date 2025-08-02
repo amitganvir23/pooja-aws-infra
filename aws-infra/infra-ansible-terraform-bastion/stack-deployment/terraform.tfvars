@@ -27,7 +27,7 @@ private_sub_cidr  = ["192.168.0.32/28","192.168.0.48/28"]
 
 
 ## Common values for all Ec2 modules
-ec2_ami              = "ami-053b0d53c279acc90"
+ec2_ami              = "ami-084568db4383264d4"
 ec2_instance_type    = "t2.micro"
 aws_key_name         = "mac2"
 ec2_volume_type      = "gp2"

@@ -21,7 +21,7 @@ vpc_name          = "amit-vpc"
 
 
 ## Common values for all Ec2 modules
-ec2_ami              = "ami-05fa00d4c63e32376"
+ec2_ami              = "ami-084568db4383264d4"
 ec2_instance_type    = "t2.micro"
 aws_key_name         = "mac"
 ec2_volume_type      = "gp2"

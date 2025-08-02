@@ -61,7 +61,7 @@ module "my-server" {
    vpc_id 	                = "${module.my-vpc.vpc_id}"
    subnet_id                    = element(module.my-vpc.private_subnet_id[0], 2)
    associate_public_ip_address  = "false"
-   ec2_count                    = 2
+   ec2_count                    = 1
    ec2_volume_type              = var.ec2_volume_type
    ec2_volume_size              = var.ec2_volume_size
 }
@@ -77,7 +77,7 @@ module "my-node" {
    vpc_id 	                    = "${module.my-vpc.vpc_id}"
    subnet_id                    = element(module.my-vpc.private_subnet_id[0], 2)
    associate_public_ip_address  = "false"
-   ec2_count                    = 2
+   ec2_count                    = 1
    ec2_volume_type              = var.ec2_volume_type
    ec2_volume_size              = var.ec2_volume_size
 }
