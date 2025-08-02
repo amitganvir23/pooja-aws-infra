@@ -17,6 +17,15 @@ provider "aws" {
   region = "${var.region}"
 }
 
+variable "environment" {
+  type = string
+}
+
+resource "aws_s3_bucket" "mybucket" {
+  bucket = "my-${var.environment}-bucket-1234"
+  acl    = "private"
+}
+
 
 /****
 /********************************************************************************/
