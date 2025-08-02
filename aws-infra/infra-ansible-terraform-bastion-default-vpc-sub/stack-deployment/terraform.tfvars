@@ -21,9 +21,10 @@ vpc_name          = "amit-vpc"
 
 
 ## Common values for all Ec2 modules
-ec2_ami              = "ami-084568db4383264d4"
-ec2_instance_type    = "t2.micro"
-aws_key_name         = "mac"
-ec2_volume_type      = "gp2"
+ec2_ami              = "ami-020cba7c55df1f615" # ubuntu 24.04
+#ec2_ami              = "ami-053b0d53c279acc90"
+ec2_instance_type    = "t3.micro"
+aws_key_name         = "newmac"
+ec2_volume_type      = "gp3"
 ec2_volume_size      = "8"
 
